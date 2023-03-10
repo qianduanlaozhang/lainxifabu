@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    /* div{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        border: 1px solid #000;
+    } */
+    #canvas{
+        border: 1px solid #000;
+        margin: 200px 500px;
+    }
+</style>
+<body>
+    <div id="box">1</div>
+    <canvas id="canvas" height="300" width="300"></canvas>
+    <button class="download" height="300" width="300">download</button>
+    <button class="abort" height="300" width="300">abort</button>
+    <!-- <video src="./《起风了》原版MV.MP4" controls></video> -->
+</body>
+</html>
+<script>
+    const box = document.getElementById('box')
+    let loop = new Event("loop", {"bubbles":true, "cancelable":false})
+    box.dispatchEvent(loop);
+    box.addEventListener('loop', (e) => {
+        console.log(e)
+    })
+
+//     const box = document.getElementById('box')
+//     // 获取联系人
+// const contacts = navigator.contacts
+// var pText = document.createTextNode(contacts);
+// box.appendChild(pText)
+// console.log(contacts)
+// // console.log(contacts.getProperties())
+// async function checkProperties() {
+//   const supportedProperties = await navigator.contacts.getProperties();
+// //   if (!supportedProperties.includes("icon")) {
+//     console.log(supportedProperties)
+// //     console.log("Your system does not support getting icons.");
+// //   }
+// }
+// checkProperties()
+// function showPosition(position) {
+//     // x.innerHTML = "Latitude: " + position.coords.latitude +
+//     console.log(position)
+//     var pText = document.createTextNode(contacts);
+//     box.appendChild(pText)
+// }
+// navigator.geolocation.getCurrentPosition(showPosition);
+// var constraints = { audio: true, video: { width: 1280, height: 720, facingMode: "user"  } };
+
+// navigator.mediaDevices.getUserMedia(constraints)
+// .then(function(mediaStream) {
+//   var video = document.querySelector('video');
+//   video.srcObject = mediaStream;
+//   video.onloadedmetadata = function(e) {
+//     video.play();
+//   };
+// })
+// .catch(function(err) { console.log(err.name + ": " + err.message); }); // 总是在最后检查错误
+
+
+</script>
+<!-- <script src="./js/kongzhiq.js"></script>   -->

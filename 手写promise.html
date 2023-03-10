@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    class MyPromise {
+        constructor(executor) {
+            this.status = 'pending'; // 初始状态为 pending
+            this.value = undefined; // 成功时的返回值
+            this.reason = undefined; // 失败时的原因
+
+            // 存储成功和失败的回调函数
+            this.onResolvedCallbacks = [];
+            this.onRejectedCallbacks = [];
+
+            const resolve = (value) => {
+                // 状态只能从 pending 转变为其他状态一次
+                if (this.status === 'pending') {
+                    this.status = 'fulfilled'; // 转变为 fulfilled
+                    this.value = value; // 存储成功的返回值
+
+                    // 依次执行所有成功的回调函数
+                    this.onResolvedCallbacks.forEach((fn) => fn());
+                }
+            };
+
+            const reject = (reason) => {
+                // 状态只能从 pending 转变为其他状态一次
+                if (this.status === 'pending') {
+                    this.status = 'rejected'; // 转变为 rejected
+                    this.reason = reason; // 存储失败的原因
+
+                    // 依次执行所有失败的回调函数
+                    this.onRejectedCallbacks.forEach((fn) => fn());
+                }
+            };
+
+            try {
+                // 执行传入的 executor 函数
+                executor(resolve, reject);
+            } catch (err) {
+                // 如果 executor 函数执行出错，则直接调用 reject 函数
+                reject(err);
+            }
+        }
+
+        then(onFulfilled, onRejected) {
+            // 如果 onFulfilled 不是函数，则创建一个默认函数，返回当前的值
+            onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (value) => value;
+
+            // 如果 onRejected 不是函数，则创建一个默认函数，抛出当前的原因
+            onRejected =
+                typeof onRejected === 'function'
+                    ? onRejected
+                    : (reason) => {
+                        throw reason;
+                    }
+        }
+    }
+</script>
